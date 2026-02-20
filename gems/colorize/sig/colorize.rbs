@@ -1,0 +1,73 @@
+class String
+  # Change color of string
+  #
+  # @example
+  #   "This is blue".colorize(:blue)
+  #   "This is also blue".colorize(:color => :blue)
+  #   "This is bold green".colorize(:color => :green, :mode => :bold)
+  def colorize: (::Symbol color_code) -> ::String
+               | ({ color: ::Symbol, background: ::Symbol, mode: ::Symbol }) -> ::String
+               | ({ color: ::Symbol }) -> ::String
+               | ({ background: ::Symbol }) -> ::String
+               | ({ mode: ::Symbol }) -> ::String
+
+  # Return uncolorized string
+  def uncolorize: () -> ::String
+
+  # Return true if string is colorized
+  def colorized?: () -> bool
+
+  # Color shorthand methods (e.g. `"text".red`, `"text".blue`)
+  def black: () -> ::String
+  def red: () -> ::String
+  def green: () -> ::String
+  def yellow: () -> ::String
+  def blue: () -> ::String
+  def magenta: () -> ::String
+  def cyan: () -> ::String
+  def white: () -> ::String
+  def light_black: () -> ::String
+  def light_red: () -> ::String
+  def light_green: () -> ::String
+  def light_yellow: () -> ::String
+  def light_blue: () -> ::String
+  def light_magenta: () -> ::String
+  def light_cyan: () -> ::String
+  def light_white: () -> ::String
+  def default: () -> ::String
+
+  # Background color shorthand methods (e.g. `"text".on_red`, `"text".on_blue`)
+  def on_black: () -> ::String
+  def on_red: () -> ::String
+  def on_green: () -> ::String
+  def on_yellow: () -> ::String
+  def on_blue: () -> ::String
+  def on_magenta: () -> ::String
+  def on_cyan: () -> ::String
+  def on_white: () -> ::String
+  def on_light_black: () -> ::String
+  def on_light_red: () -> ::String
+  def on_light_green: () -> ::String
+  def on_light_yellow: () -> ::String
+  def on_light_blue: () -> ::String
+  def on_light_magenta: () -> ::String
+  def on_light_cyan: () -> ::String
+  def on_light_white: () -> ::String
+  def on_default: () -> ::String
+
+  # Mode shorthand methods (e.g. `"text".bold`, `"text".underline`)
+  def bold: () -> ::String
+  def italic: () -> ::String
+  def underline: () -> ::String
+  def blink: () -> ::String
+  def swap: () -> ::String
+  def hide: () -> ::String
+
+  def self.colors: () -> ::Array[::Symbol]
+  def self.modes: () -> ::Array[::Symbol]
+  def self.disable_colorization: () -> bool
+  def self.disable_colorization=: (bool) -> bool
+  def self.color_samples: () -> void
+  def self.add_color_alias: (::Symbol new_color, ::Symbol existing_color) -> void
+                           | (::Hash[::Symbol, ::Symbol]) -> void
+end
