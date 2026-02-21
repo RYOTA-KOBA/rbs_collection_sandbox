@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run setup
+        run: bin/setup
+
+      - name: Run type check for all gems
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bundle exec rake check
+
+      - name: Detect changed gems
+        if: github.event_name == 'pull_request'
+        id: changed-gems
+        run: |
+          CHANGED_GEMS=$(git diff --name-only ${{ github.event.pull_request.base.sha }}...HEAD \
+            | grep '^gems/' \
+            | sed 's|gems/\([^/]*\)/.*|\1|' \
+            | sort -u \
+            | tr '\n' ' ')
+          echo "gems=$CHANGED_GEMS" >> $GITHUB_OUTPUT
+
+      - name: Run type check for changed gems
+        if: github.event_name == 'pull_request' && steps.changed-gems.outputs.gems != ''
+        run: |
+          for gem in ${{ steps.changed-gems.outputs.gems }}; do
+            bundle exec rake check[$gem]
+          done
