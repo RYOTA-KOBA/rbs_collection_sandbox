@@ -1,33 +1,4 @@
-# rbs_inline: enabled
-
 require "google/cloud/ai_platform/v1"
-
-class AIPlatformSample
-  #: () -> Google::Cloud::AIPlatform::V1::PredictionService::Client
-  def create_client
-    Google::Cloud::AIPlatform::V1::PredictionService::Client.new
-  end
-
-  #: () -> Google::Cloud::AIPlatform::V1::PredictionService::Client
-  def create_client_with_endpoint
-    Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
-      config.endpoint = "aiplatform.googleapis.com"
-    end
-  end
-
-  #: (Google::Cloud::AIPlatform::V1::PredictionService::Client, ::String) -> Google::Cloud::AIPlatform::V1::GenerateContentResponse
-  def generate(client, model)
-    client.generate_content({
-      model: model,
-      contents: [{ role: "USER", parts: [{ text: "Hello" }] }]
-    })
-  end
-
-  #: (Google::Cloud::AIPlatform::V1::GenerateContentResponse) -> ::Array[::String?]
-  def extract_texts(response)
-    response.candidates.map(&:content).flat_map(&:parts).map(&:text)
-  end
-end
 
 # PredictionService::Client
 client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
