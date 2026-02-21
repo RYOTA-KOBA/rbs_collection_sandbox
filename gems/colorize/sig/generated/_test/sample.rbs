@@ -1,9 +1,0 @@
-# Generated from _test/sample.rb with RBS::Inline
-
-class ColorizeSample
-  # : (String) -> String
-  def colorized_hello: (String) -> String
-
-  # : (Integer, Integer) -> String
-  def colorized_sum: (Integer, Integer) -> String
-end
