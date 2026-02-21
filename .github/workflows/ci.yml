@@ -26,7 +26,11 @@ jobs:
 
       - name: Run type check for all gems
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: bundle exec rake check
+        run: |
+          for gem in $(ls gems/); do
+            bin/rbs_inline $gem
+          done
+          bin/steep_check
 
       - name: Detect changed gems
         if: github.event_name == 'pull_request'
@@ -43,5 +47,6 @@ jobs:
         if: github.event_name == 'pull_request' && steps.changed-gems.outputs.gems != ''
         run: |
           for gem in ${{ steps.changed-gems.outputs.gems }}; do
-            bundle exec rake check[$gem]
+            bin/rbs_inline $gem
+            bin/steep_check $gem
           done
