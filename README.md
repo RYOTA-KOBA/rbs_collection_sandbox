@@ -22,20 +22,31 @@ gems/
 
 ```bash
 bundle install
+# または
+rake setup
 ```
 
-### 2. サンプルコードから RBS を生成する
+### 2. RBS 生成と型検査を一括実行する（Rake）
 
 ```bash
-# gems/<gem名> ディレクトリに移動して実行
-cd gems/<gem名>
-bundle exec rbs-inline --output _test/
+# 全 gem に対して実行
+rake
+
+# 特定の gem に対してのみ実行
+rake check[<gem名>]
 ```
 
-### 3. 型検査を実行する
+### 手動で実行する場合
 
 ```bash
-bundle exec steep check
+# RBS の生成（特定の gem）
+bin/rbs_inline <gem名>
+
+# 型検査（全 gem）
+bin/steep_check
+
+# 型検査（特定の gem）
+bin/steep_check <gem名>
 ```
 
 ## 例: colorize
@@ -59,6 +70,5 @@ bundle exec steep check
 1. `gems/<gem名>/` ディレクトリを作成する
 2. `gems/<gem名>/_test/sample.rb` にサンプルコードを記述する（`# rbs_inline: enabled` を先頭に追加）
 3. `gems/<gem名>/sig/<gem名>.rbs` に gem の型定義を記述する
-4. `cd gems/<gem名> && bundle exec rbs-inline --output _test/` で型定義を生成する
-5. `Steepfile` に新しいターゲットを追加する
-6. `bundle exec steep check` で型検査を実行する
+4. `Steepfile` に新しいターゲットを追加する
+5. `rake check[<gem名>]` で RBS 生成と型検査を実行する

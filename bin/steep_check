@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -n "$1" ]; then
+  bundle exec steep check "$1"
+else
+  bundle exec steep check
+fi
