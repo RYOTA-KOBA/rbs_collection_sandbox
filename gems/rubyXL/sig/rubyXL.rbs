@@ -12,7 +12,7 @@ module RubyXL
   end
 
   class Cell
-    def value: () -> (::String | ::Integer | ::Float | ::DateTime | nil)
+    def value: () -> (::String | ::Integer | ::Float | ::Date | nil)
     def change_fill: (::String rgb) -> void
     def change_font_bold: (bool bold) -> void
     def change_text_wrap: (bool wrap) -> void
