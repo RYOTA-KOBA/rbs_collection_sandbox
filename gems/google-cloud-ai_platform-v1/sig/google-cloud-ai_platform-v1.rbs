@@ -1,0 +1,49 @@
+module Google
+  module Cloud
+    module AIPlatform
+      module V1
+        class Part
+          def text: () -> ::String?
+        end
+
+        class Content
+          def role: () -> ::String
+
+          def parts: () -> ::Array[Part]
+        end
+
+        class Candidate
+          def content: () -> Content
+
+          def finish_reason: () -> ::Integer
+        end
+
+        class GenerateContentResponse
+          def candidates: () -> ::Array[Candidate]
+        end
+
+        class GenerateContentRequest
+          attr_accessor model: ::String
+
+          def contents: () -> ::Array[Content]
+        end
+
+        module PredictionService
+          class Client
+            class Configuration
+              attr_accessor endpoint: ::String?
+
+              attr_accessor timeout: ::Float?
+            end
+
+            def initialize: () -> void
+                          | () { (Configuration) -> void } -> void
+
+            def generate_content: (::Hash[untyped, untyped] request) -> GenerateContentResponse
+                                | (GenerateContentRequest request) -> GenerateContentResponse
+          end
+        end
+      end
+    end
+  end
+end
