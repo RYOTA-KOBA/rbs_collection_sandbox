@@ -30,7 +30,7 @@ class AIPlatformSample
     response.candidates
   end
 
-  #: (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content
+  #: (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content?
   def get_content(candidate)
     candidate.content
   end
@@ -40,7 +40,7 @@ class AIPlatformSample
     content.parts
   end
 
-  #: (Google::Cloud::AIPlatform::V1::Part) -> ::String?
+  #: (Google::Cloud::AIPlatform::V1::Part) -> ::String
   def get_text(part)
     part.text
   end
@@ -66,7 +66,7 @@ response = client.generate_content({
 candidates = response.candidates
 
 # content and parts
-texts = candidates.map(&:content).flat_map(&:parts).map(&:text)
+texts = candidates.filter_map(&:content).flat_map(&:parts).map(&:text)
 
 # Candidate
 candidate = candidates.first
@@ -75,10 +75,12 @@ if candidate
   finish_reason = candidate.finish_reason
 
   # Content
-  role = content.role
-  parts = content.parts
+  if content
+    role = content.role
+    parts = content.parts
 
-  # Part
-  part = parts.first
-  text = part.text if part
+    # Part
+    part = parts.first
+    text = part.text if part
+  end
 end

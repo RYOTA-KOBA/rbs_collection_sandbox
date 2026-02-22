@@ -13,12 +13,12 @@ class AIPlatformSample
   # : (Google::Cloud::AIPlatform::V1::GenerateContentResponse) -> ::Array[Google::Cloud::AIPlatform::V1::Candidate]
   def get_candidates: (Google::Cloud::AIPlatform::V1::GenerateContentResponse) -> ::Array[Google::Cloud::AIPlatform::V1::Candidate]
 
-  # : (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content
-  def get_content: (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content
+  # : (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content?
+  def get_content: (Google::Cloud::AIPlatform::V1::Candidate) -> Google::Cloud::AIPlatform::V1::Content?
 
   # : (Google::Cloud::AIPlatform::V1::Content) -> ::Array[Google::Cloud::AIPlatform::V1::Part]
   def get_parts: (Google::Cloud::AIPlatform::V1::Content) -> ::Array[Google::Cloud::AIPlatform::V1::Part]
 
-  # : (Google::Cloud::AIPlatform::V1::Part) -> ::String?
-  def get_text: (Google::Cloud::AIPlatform::V1::Part) -> ::String?
+  # : (Google::Cloud::AIPlatform::V1::Part) -> ::String
+  def get_text: (Google::Cloud::AIPlatform::V1::Part) -> ::String
 end

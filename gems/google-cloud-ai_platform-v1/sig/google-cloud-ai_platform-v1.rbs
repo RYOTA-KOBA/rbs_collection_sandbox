@@ -3,7 +3,7 @@ module Google
     module AIPlatform
       module V1
         class Part
-          def text: () -> ::String?
+          def text: () -> ::String
         end
 
         class Content
@@ -13,9 +13,9 @@ module Google
         end
 
         class Candidate
-          def content: () -> Content
+          def content: () -> Content?
 
-          def finish_reason: () -> ::Integer
+          def finish_reason: () -> ::Symbol
         end
 
         class GenerateContentResponse
