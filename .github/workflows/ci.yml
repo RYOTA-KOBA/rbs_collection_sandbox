@@ -60,3 +60,10 @@ jobs:
           for gem in ${{ steps.changed-gems.outputs.gems }}; do
             bundle exec rake check[$gem]
           done
+
+      - name: Check generated RBS files are up-to-date
+        if: github.event_name == 'pull_request' && steps.changed-gems.outputs.gems != ''
+        run: |
+          for gem in ${{ steps.changed-gems.outputs.gems }}; do
+            bundle exec rake diff[$gem]
+          done
