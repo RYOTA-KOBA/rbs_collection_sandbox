@@ -47,13 +47,23 @@ bin/steep_check
 bin/steep_check <gem名>
 ```
 
-## 例: rubyXL
+## 例
+
+### rubyXL
 
 `gems/rubyXL/` に rubyXL gem (3.4.27) の型定義テストが含まれています。
 
 - `gems/rubyXL/_test/sample.rb` — rubyXL を使用したサンプルコード（rbs-inline アノテーション付き）
 - `gems/rubyXL/sig/rubyXL.rbs` — rubyXL gem の型定義
 - `gems/rubyXL/sig/generated/_test/sample.rbs` — rbs-inline で生成された型定義
+
+### google-cloud-ai_platform-v1
+
+`gems/google-cloud-ai_platform-v1/` に google-cloud-ai_platform-v1 gem (1.15.x) の型定義テストが含まれています。
+
+- `gems/google-cloud-ai_platform-v1/_test/sample.rb` — PredictionService::Client を使用したサンプルコード（rbs-inline アノテーション付き）
+- `gems/google-cloud-ai_platform-v1/sig/google-cloud-ai_platform-v1.rbs` — gem の型定義
+- `gems/google-cloud-ai_platform-v1/sig/generated/_test/sample.rbs` — rbs-inline で生成された型定義
 
 ## 新しい gem を追加する手順
 
